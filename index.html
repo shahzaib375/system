@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soap Agency - Final Stable POS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="logo-section"><h2>CLEAN AGENCY</h2></div>
+        <p style="font-size: 0.75rem; color: #94a3b8; margin-top: 15px;">Shortcuts:<br>TAB: Browse<br>ENTER: Select<br>F10: Checkout<br>ESC: Close</p>
+    </div>
+
+    <div class="main-content">
+        <div class="product-section">
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search item... (Tab to browse)" onkeyup="filterProducts()" tabindex="1">
+            </div>
+            <div class="grid-container" id="productGrid"></div>
+        </div>
+
+        <div class="cart-panel">
+            <h3>Current Order (<span id="itemCount">0</span>)</h3>
+            <div class="cart-items" id="cartItems"></div>
+            <div style="font-size: 1.5rem; font-weight: 800; margin-bottom: 15px; display: flex; justify-content: space-between;">
+                <span>Total:</span> <span id="total" style="color:var(--primary)">Rs 0</span>
+            </div>
+            <button class="btn-main" onclick="openCheckoutModal()">Process Sale (F10)</button>
+        </div>
+    </div>
+
+    <!-- Add/Edit Modal -->
+    <div class="modal-overlay" id="qtyModal">
+        <div class="premium-modal">
+            <h2 id="modalTitle">Enter Quantity</h2>
+            <p id="modalPName" style="color: #64748b; margin: 10px 0;"></p>
+            <input type="number" class="qty-input" id="qtyInput" value="1" min="1">
+            <button class="btn-main" onclick="handleConfirm()">Confirm (Enter)</button>
+            <button style="background:none; border:none; color:#94a3b8; margin-top:15px; cursor:pointer;" onclick="closeModal('qtyModal')">Cancel (Esc)</button>
+        </div>
+    </div>
+
+    <!-- Checkout Success Modal -->
+    <div class="modal-overlay" id="checkoutModal">
+        <div class="premium-modal">
+            <div style="background:#ecfdf5; color:var(--success); width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 15px; font-size:30px;">✓</div>
+            <h2>Order Complete</h2>
+            <div class="receipt-card">
+                <div id="receiptContent" style="max-height: 150px; overflow-y: auto; margin-bottom: 10px;"></div>
+                <div style="border-top: 2px solid white; padding-top: 10px; display: flex; justify-content: space-between; font-weight: 800; font-size: 1.1rem;">
+                    <span>Grand Total</span><span id="modalTotal">Rs 0</span>
+                </div>
+            </div>
+            <button class="btn-main" onclick="finalizeOrder()">New Order</button>
+            <button style="background:none; border:none; color:#94a3b8; margin-top:15px; cursor:pointer;" onclick="closeModal('checkoutModal')">Back to Edit</button>
+        </div>
+    </div>
+
+   <script src="script.js"></script>
+</body>
+</html>
